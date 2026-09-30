@@ -2,7 +2,9 @@
 
 把用户在小红书收藏的旅行心动，整理成可编辑、可保存、可分享的手绘路书。
 
-**[在线体验收藏成形](https://redcowork.xiaohongshu.com/f/shoucang-chengxing)**
+**[公开体验收藏成形（无需登录）](https://shoucang-chengxing.shiranbing.chatgpt.site)**
+
+[REDCowork 笔试作品入口](https://redcowork.xiaohongshu.com/f/shoucang-chengxing)（平台可能要求登录）。公开体验站与笔试作品使用同一版静态文件；源码仓库保持私有，不影响体验站的公开访问。
 
 收藏灵感 → 选择旅行偏好 → 安排当天行程 → 自动排版手绘路书 → 保存分享。
 
