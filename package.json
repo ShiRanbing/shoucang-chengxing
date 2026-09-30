@@ -1,0 +1,22 @@
+{
+  "name": "shoucang-chengxing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tailwindcss -i ./src/styles.css -o ./public/styles.css --minify && node scripts/build.mjs",
+    "test": "node --test tests/model.test.mjs tests/landmarks.test.mjs",
+    "test:landmarks": "node tests/landmarks.mjs",
+    "test:layout": "node tests/poster-layout.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "test:portable": "node tests/portable.mjs",
+    "test:community": "node tests/community.mjs",
+    "test:dialogs": "node tests/dialogs.mjs",
+    "test:guide": "node tests/guide.mjs"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "playwright": "^1.63.0",
+    "tailwindcss": "^4.3.3"
+  }
+}

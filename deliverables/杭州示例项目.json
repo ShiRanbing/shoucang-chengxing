@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "city": "杭州",
+  "otherTrips": {},
+  "title": "在杭州，偷得半日闲",
+  "date": "",
+  "theme": "watercolor",
+  "preferences": {
+    "pace": "slow",
+    "interests": [
+      "nature",
+      "coffee"
+    ]
+  },
+  "inspirations": [
+    {
+      "id": "sample-1",
+      "city": "杭州",
+      "place": "满觉陇",
+      "category": "nature",
+      "reason": "想走进山野，给自己一个不赶路的下午。",
+      "excerpt": "据用户提供的 Joan 笔记整理：满觉陇适合半日漫步，作者分享了茶馆、登高和猫猫寺等停留点。",
+      "mustVisit": true,
+      "sourceRef": "manjuelong",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-2",
+      "city": "杭州",
+      "place": "白鹤栖茶",
+      "category": "coffee",
+      "reason": "坐下来喝一杯茶，把发呆也写进行程。",
+      "excerpt": "据 Joan 笔记整理：作者提到台阶旁的白鹤栖茶，并分享休息、喝茶和拍照体验。",
+      "mustVisit": false,
+      "sourceRef": "manjuelong",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-3",
+      "city": "杭州",
+      "place": "猫猫寺 MIAOSY",
+      "category": "culture",
+      "reason": "留一点时间，看看猫咪和可爱的小物。",
+      "excerpt": "据 Joan 笔记整理：作者从山顶继续前往猫猫寺，提到文创与茶点。具体消费及开放信息需另行确认。",
+      "mustVisit": false,
+      "sourceRef": "manjuelong",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-4",
+      "city": "杭州",
+      "place": "西湖",
+      "category": "nature",
+      "reason": "把一阵湖风，留给慢慢喜欢这座城的我。",
+      "excerpt": "据努努学习笔记整理：作者将西湖列为个人推荐，并提到可以选择不同的沿湖散步区域。",
+      "mustVisit": false,
+      "sourceRef": "places",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-5",
+      "city": "杭州",
+      "place": "茅家埠",
+      "category": "nature",
+      "reason": "想选一段安静的湖边，走走停停。",
+      "excerpt": "据努努学习笔记整理：作者在西湖游览建议中提到茅家埠，偏好这里的风景与游览感受。",
+      "mustVisit": false,
+      "sourceRef": "places",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-6",
+      "city": "杭州",
+      "place": "大宋蟹略·西湖庭院店",
+      "category": "food",
+      "reason": "想把江南庭院和一顿好饭放在同一站。",
+      "excerpt": "据幼儿园最皮笔记整理：作者分享大宋蟹略西湖庭院景观店的曲水流觞、茶百戏和餐饮体验。",
+      "mustVisit": false,
+      "sourceRef": "dining",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-7",
+      "city": "杭州",
+      "place": "拱宸桥",
+      "category": "culture",
+      "reason": "去桥边看看水，给这次出发留张照片。",
+      "excerpt": "据努努学习笔记整理：拱宸桥出现在作者个人推荐的杭州景点中。此卡仅保留地点灵感。",
+      "mustVisit": false,
+      "sourceRef": "places",
+      "sourceUrl": "",
+      "isExample": true
+    },
+    {
+      "id": "sample-8",
+      "city": "杭州",
+      "place": "河坊街",
+      "category": "street",
+      "reason": "如果顺路，就逛逛街巷里的小店。",
+      "excerpt": "据努努学习笔记整理：作者对河坊街的个人建议是顺路游览。是否加入由自己的偏好决定。",
+      "mustVisit": false,
+      "sourceRef": "places",
+      "sourceUrl": "",
+      "isExample": true
+    }
+  ],
+  "stops": [
+    {
+      "id": "5903dd3b-3473-4fee-abbc-d6734e91cf65",
+      "inspirationId": "sample-1",
+      "minutes": 45,
+      "note": null
+    },
+    {
+      "id": "b88ba8af-3c28-41ea-9db1-f3b0af6a5fa0",
+      "inspirationId": "sample-2",
+      "minutes": 45,
+      "note": null
+    },
+    {
+      "id": "93149ad3-ba4d-4dd8-a59d-f631c27c256c",
+      "inspirationId": "sample-3",
+      "minutes": 45,
+      "note": null
+    }
+  ],
+  "community": {
+    "savedNoteIds": [],
+    "travelNoteIds": []
+  }
+}

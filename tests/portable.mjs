@@ -1,0 +1,61 @@
+import { chromium } from 'playwright';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { readFile, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+
+// Direct file:// review: no web server, browser window or external network is required.
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const errors = [], external = [];
+try {
+  const context = await browser.newContext({ acceptDownloads: true });
+  await context.route(/^https?:/, route => { external.push(route.request().url()); return route.abort(); });
+  const page = await context.newPage();
+  page.on('pageerror', error => errors.push(error.message));
+  // Reproduce the user's exact entry point, then follow the visible recovery link.
+  await page.goto(pathToFileURL(resolve('public/index.html')).href);
+  assert.equal(await page.locator('#local-entry-guide').isVisible(), true);
+  assert.equal(await page.locator('#welcome-demo').isVisible(), false);
+  await page.locator('#open-local-preview').click();
+  await page.waitForURL(pathToFileURL(resolve('deliverables/收藏成形-双击预览.html')).href);
+  await page.locator('#nav-workbench').click();
+  await page.locator('#welcome-demo').click();
+  await page.waitForFunction(() => !document.querySelector('#export-png').disabled);
+  assert.equal(await page.locator('.inspiration-card').count(), 8);
+  await page.locator('[data-action=source]').first().click();
+  await page.waitForFunction(() => [...document.querySelectorAll('#source-dialog img')].every(img => img.complete && img.naturalWidth > 0));
+  await page.locator('[data-close=source-dialog]').click();
+  await page.locator('[data-theme=retro]').click();
+  await page.waitForFunction(() => !document.querySelector('#export-png').disabled);
+  const pending = page.waitForEvent('download');
+  await page.locator('#export-png').click();
+  await (await pending).saveAs(resolve('test-results/portable.png'));
+  const png = await readFile('test-results/portable.png');
+  assert.equal(png.readUInt32BE(16), 1080); assert.equal(png.readUInt32BE(20), 1440);
+  await page.locator('[data-close=image-dialog]').click();
+  await page.locator('.project-menu summary').click();
+  await page.locator('#new-project').click();
+  await page.locator('#confirm-yes').click();
+  assert.equal(await page.locator('.inspiration-card').count(), 0);
+  await page.locator('#add-inspiration').click();
+  await page.locator('[name=place]').fill('自己的湖边小店');
+  await page.locator('[name=reason]').fill('把这个下午留给自己。');
+  await page.getByRole('button', { name: '保存这份心动', exact: true }).click();
+  await page.getByRole('button', { name: '加入自己的湖边小店', exact: true }).click();
+  await page.waitForFunction(() => !document.querySelector('#export-png').disabled);
+  const ownDownload = page.waitForEvent('download');
+  await page.locator('#export-png').click();
+  await (await ownDownload).saveAs(resolve('test-results/portable-personal.png'));
+  await page.locator('[data-close=image-dialog]').click();
+  await page.getByRole('button', { name: '编辑自己的湖边小店', exact: true }).click();
+  await page.locator('#delete-inspiration').click();
+  assert.match(await page.locator('#confirm-message').textContent(), /行程站点/);
+  await page.locator('#confirm-yes').click();
+  assert.equal(await page.locator('.inspiration-card').count(), 0);
+  assert.equal(await page.locator('#stop-count').textContent(), '0');
+  await page.waitForFunction(() => document.querySelector('#export-png').disabled);
+  assert.deepEqual(errors, []); assert.deepEqual(external, []);
+  const report = { checkedAt: new Date().toISOString(), method: 'Edge headless file://，无本地服务', passes: ['误开public/index.html时显示引导并可进入交互预览', '独立HTML载入', '8张真实来源收藏卡片', '内嵌来源截图', '主题切换', '1080×1440 PNG真实下载', '空白项目新增收藏到PNG导出完整流程', '删除收藏确认及站点同步移除'], errors, external };
+  await writeFile('test-results/portable-report.json', JSON.stringify(report, null, 2));
+  console.log(JSON.stringify(report, null, 2));
+} finally { await browser.close(); }

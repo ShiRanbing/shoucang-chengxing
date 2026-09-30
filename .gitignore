@@ -1,0 +1,20 @@
+node_modules/
+.npm-cache/
+dist/
+dist-*/
+test-results/
+assets-staging/
+scripts/*.local.json
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+
+# 构建产物与历史传输包留在本地，只保留已发布的轻量版本。
+/deliverables/*
+!/deliverables/scx-under-10mb-v2.zip
+!/deliverables/杭州示例项目.json
+!/deliverables/10MB以内上传说明.txt
+/docs/REDCowork-导入排查.md

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="把收藏里的旅行心动，变成属于你的手绘路书。整理灵感、编辑行程、切换三种手绘风格，保存分享。">
+  <title>收藏成形 · 把心动写进下一程</title>
+  <!-- LOCAL_ENTRY_GUARD_START -->
+  <script>
+    if (location.protocol === 'file:') document.documentElement.classList.add('local-entry');
+  </script>
+  <style>
+    #local-entry-guide { display: none; }
+    .local-entry body > :not(#local-entry-guide) { display: none !important; }
+    .local-entry #local-entry-guide { display: block; max-width: 560px; margin: 12vh auto; padding: 36px; background: #fffdf6; border: 1px solid #d6ddcf; border-radius: 18px; color: #334f46; font: 16px/1.8 system-ui, sans-serif; }
+    #local-entry-guide h1 { font-size: 24px; margin: 0 0 16px; }
+    #local-entry-guide a { display: inline-block; margin-top: 14px; padding: 10px 20px; border-radius: 8px; background: #334f46; color: white; text-decoration: none; }
+  </style>
+  <!-- LOCAL_ENTRY_GUARD_END -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23334f46'/%3E%3Cpath d='M12 10h16v22l-8-5-8 5z' fill='%23f4e2ae'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- LOCAL_ENTRY_GUIDE_START -->
+  <section id="local-entry-guide" aria-labelledby="local-entry-title">
+    <h1 id="local-entry-title">请打开可交互的本地预览</h1>
+    <p>当前打开的是网站部署入口，直接双击时浏览器会限制它加载交互脚本。</p>
+    <p>本地体验请打开项目中 <strong>deliverables / 收藏成形-双击预览.html</strong>，不需要启动服务。</p>
+    <a id="open-local-preview" href="../deliverables/收藏成形-双击预览.html">打开可交互预览 →</a>
+    <p>如果你只解压了 REDCowork 上传包，请使用另外提供的双击预览文件。</p>
+  </section>
+  <!-- LOCAL_ENTRY_GUIDE_END -->
+  <header class="topbar">
+    <a class="brand" id="brand-home" href="#discover" aria-label="收藏成形首页"><svg class="brand-mark" aria-hidden="true" viewBox="0 0 48 48" fill="none"><rect x="1" y="1" width="46" height="46" rx="14" fill="#355949"/><path d="M15 11h18v27l-9-5-9 5V11Z" fill="#fff7df"/><path d="M20 17h8M20 21h4" stroke="#355949" stroke-width="2" stroke-linecap="round"/><path d="M22 29c0-4 8-1 8-6" stroke="#bb7c48" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 3"/><circle cx="22" cy="29" r="2" fill="#bb7c48"/><path d="M30 17.5c-3-3.3-6 1-0 4.5 6-3.5 3-7.8 0-4.5Z" fill="#bb7c48"/></svg><span>收藏成形<small>MAKE A DAY OF IT</small></span></a>
+    <div class="header-center"><span class="local-dot" aria-hidden="true"></span><span id="save-status" role="status">仅保存在此浏览器</span></div>
+    <nav class="header-actions" aria-label="项目操作">
+      <button id="nav-discover" class="page-nav" aria-pressed="true">发现灵感</button>
+      <button id="nav-workbench" class="page-nav" aria-pressed="false">我的路书 <span id="nav-trip-count">0</span></button>
+      <button id="open-guide" class="guide-trigger" aria-label="打开使用指南" aria-haspopup="dialog"><span aria-hidden="true">?</span><span class="guide-trigger-label">使用指南</span></button>
+      <button id="load-demo" class="text-button"><span aria-hidden="true">◈</span> 杭州示例</button>
+      <details class="project-menu"><summary>项目 <span aria-hidden="true">⌄</span></summary><div class="menu-popover"><button id="new-project">新建空白路书</button><button id="export-json">备份项目 JSON</button><button id="import-json">导入项目 JSON</button><button id="about-project">关于这份作品</button></div></details>
+    </nav>
+  </header>
+  <main id="discover-page" class="discover-page">
+    <aside class="discovery-sidebar" aria-label="社区导航">
+      <p class="eyebrow">THE LITTLE ESCAPE</p>
+      <div class="feed-nav"><button data-feed="all" aria-pressed="true"><span data-icon="discover"></span><span>发现</span></button><button data-feed="saved" aria-pressed="false"><span data-icon="bookmark"></span><span>普通收藏</span><b id="saved-count">0</b></button><button data-feed="travel" aria-pressed="false"><span data-icon="travel"></span><span>旅行收藏</span><b id="travel-count">0</b></button></div>
+      <div class="sidebar-note"><span>一份收藏，<br>也可以是出发的开始。</span><p>普通收藏，留着慢慢看。<br>旅行收藏，带进下一程。</p><span class="sidebar-doodle" aria-hidden="true">↝</span></div>
+      <p class="community-disclosure">社区收藏体验 Demo<br>22 篇原创笔记 · AI 创作封面<br>未连接小红书账号</p>
+    </aside>
+    <section class="discovery-main" aria-label="社区笔记">
+      <div class="discovery-heading"><div><p class="eyebrow">LITTLE THINGS, LOVELY DAYS</p><h1>生活里的心动，<em>都值得收藏。</em></h1><p>日常的喜欢，留着慢慢看。旅行的心动，带进下一程。</p></div><div class="search-area"><label class="note-search"><span class="sr-only">搜索旅行笔记</span><span data-icon="search"></span><input id="note-search" type="search" placeholder="试试搜索「上海」或「杭州」" aria-describedby="search-hint" maxlength="80"><button id="clear-note-search" type="button" aria-label="清空搜索" hidden>×</button></label><p id="search-hint">本次旅行体验支持 <button data-search-city="上海" aria-pressed="false">上海 ↗</button><button data-search-city="杭州" aria-pressed="false">杭州 ↗</button></p></div></div>
+      <section id="welcome-guide" class="welcome-guide" aria-labelledby="welcome-guide-title" hidden>
+        <div class="guide-card-heading"><div><span class="guide-kicker">从心动，到出发</span><h2 id="welcome-guide-title">第一次来？跟着喜欢，做一张路书。</h2></div><button id="dismiss-welcome-guide" class="guide-dismiss" aria-label="关闭首次使用提示" title="先自己逛逛">×</button></div>
+        <ol class="guide-flow" aria-label="制作路书的四个步骤"><li><span>01</span>搜索城市</li><li><span>02</span>旅行收藏</li><li><span>03</span>挑选行程</li><li><span>04</span>保存路书</li></ol>
+        <div class="guide-card-actions"><span>不用先准备材料，选一座城就能开始。</span><div><button class="primary small" data-guide-city="杭州">从杭州开始 ↗</button><button class="outline small" data-guide-city="上海">逛逛上海</button><button id="welcome-guide-details" class="text-button">看看怎么用</button></div></div>
+      </section>
+      <div class="discovery-tags" id="note-tags" aria-label="笔记主题"></div>
+      <div class="feed-heading"><h2 id="feed-title">发现生活里的小美好</h2><span id="feed-count">22 篇灵感</span></div>
+      <div class="notes-grid" id="notes-grid"></div>
+      <p class="feed-footnote">原创示例笔记 · AI 创作封面<br>收下日常，也把旅行的心动带进计划。</p>
+    </section>
+    <div class="travel-dock" id="travel-dock"><div class="dock-icon" data-icon="travel" aria-hidden="true"></div><div><strong id="dock-title">把喜欢的，放进旅行收藏</strong><p id="dock-description">收藏几篇，再一起安排这一天。</p></div><button id="enter-trip" class="primary" disabled>去安排这一天 <span aria-hidden="true">↗</span></button></div>
+  </main>
+  <main class="workspace" id="workspace" hidden>
+    <section class="editor-pane" aria-label="收藏与行程编辑">
+      <div class="editor-heading"><p class="eyebrow">FROM SAVED TO SOMEDAY</p><h1>让收藏，<span>有下一站。</span></h1><p class="intro">把那些「下次一定」，画成这次的出发。</p></div>
+      <aside id="workbench-guide" class="workbench-guide" aria-label="下一步操作提示" hidden><span id="guide-stage" class="guide-stage" aria-hidden="true"></span><div class="guide-next-copy"><strong id="guide-next-title"></strong><p id="guide-next-description"></p><button id="guide-next-action" class="text-button"></button></div><button id="dismiss-workbench-guide" class="guide-dismiss" aria-label="关闭操作提示">×</button></aside>
+      <section class="welcome-card" id="welcome-card"><div><span class="mini-label">从一份小小的心动开始</span><p>用杭州示例试一试，也可以从自己的收藏开始。</p></div><div class="welcome-actions"><button id="welcome-demo" class="primary small">体验杭州示例</button><button id="welcome-blank" class="text-button">从空白开始</button></div></section>
+      <div class="city-selector"><div id="city-switch" aria-label="路书城市"></div><p id="city-context"></p></div>
+      <div class="editor-tabs" role="tablist" aria-label="编辑内容"><button id="tab-collections" role="tab" aria-selected="true" aria-controls="collections-panel" tabindex="0">收藏灵感 <span id="collection-count">0</span></button><button id="tab-itinerary" role="tab" aria-selected="false" aria-controls="itinerary-panel" tabindex="-1">我的行程 <span id="stop-count">0</span></button></div>
+      <section id="collections-panel" role="tabpanel" aria-labelledby="tab-collections">
+        <div class="section-toolbar"><div><h2>每一个想去，都有理由</h2><p id="collection-hint">留住地点，也留住让你心动的那一句。</p></div><button id="add-inspiration" class="outline small">＋ 添加灵感</button></div>
+        <div class="collection-list" id="collection-list"></div>
+      </section>
+      <section id="itinerary-panel" role="tabpanel" aria-labelledby="tab-itinerary" hidden>
+        <div class="project-fields"><label>路书标题 <span id="title-count">0/24</span><input id="project-title" maxlength="24" placeholder="给这次出发起个名字"></label><label>出发日期 <span>选填</span><input id="project-date" type="date" min="2000-01-01" max="2100-12-31"></label></div>
+        <div class="section-toolbar"><div><h2>我的一天，按自己的节奏</h2><p>先后顺序由你决定，停留时间也可以留白。</p></div></div>
+        <aside id="arrangement-result" class="arrangement-result" role="status" aria-live="polite" aria-atomic="true" hidden>
+          <div class="arrangement-heading"><h3>这一天，为什么这样选</h3><span id="arrangement-count"></span></div>
+          <p id="arrangement-summary" class="arrangement-summary"></p>
+          <p id="arrangement-detail" class="arrangement-detail"></p>
+        </aside>
+        <div class="stop-list" id="stop-list"></div>
+        <div id="trip-summary" class="trip-summary"></div>
+      </section>
+      <section class="preferences" aria-labelledby="preferences-title">
+        <div class="preferences-top"><h2 id="preferences-title">这次，想怎么逛？</h2><div class="pace-control" aria-label="旅行节奏"><button data-pace="slow" aria-pressed="true">慢慢来 · 3 站</button><button data-pace="compact" aria-pressed="false">多看看 · 5 站</button></div></div>
+        <div class="interest-chips" id="interest-chips" aria-label="旅行兴趣"></div>
+        <button id="arrange" class="primary arrange-button"><span aria-hidden="true">✧</span> 按偏好整理一天 <span aria-hidden="true">↗</span></button>
+        <p class="preference-note" id="arrange-reason">优先保留必去，再匹配你的兴趣。地点顺序可继续调整。</p>
+      </section>
+      <footer class="editor-footer"><span>一座城 · 一天 · 最多六次心动</span><span>用自己的方式出发</span></footer>
+    </section>
+    <section class="preview-pane" aria-label="手绘路书预览">
+      <div class="preview-toolbar"><div><span class="eyebrow">YOUR DAY, ON PAPER</span><h2>把这一天，收藏成形 <span class="live-pill">实时预览</span></h2></div><button id="enlarge-poster" class="icon-button" aria-label="放大路书">⛶</button></div>
+      <div class="style-switcher" role="group" aria-label="路书风格">
+        <button data-theme="watercolor" aria-pressed="true"><span class="theme-swatch watercolor"></span><span>水彩手账<small>温柔，把风景留在纸上</small></span><span class="theme-check">✓</span></button>
+        <button data-theme="pencil" aria-pressed="false"><span class="theme-swatch pencil"></span><span>彩铅地图<small>可爱一点，开心一点</small></span><span class="theme-check">✓</span></button>
+        <button data-theme="retro" aria-pressed="false"><span class="theme-swatch retro"></span><span>复古海报<small>把出发变成一张纪念</small></span><span class="theme-check">✓</span></button>
+      </div>
+      <div class="paper-stage"><span class="paper-label">A DAY WORTH KEEPING</span><div class="paper-mount"><span class="paper-tape" aria-hidden="true"></span><canvas id="poster" width="1080" height="1440" role="img" aria-label="手绘路书预览"></canvas></div><p class="stage-caption" id="stage-caption">从左侧添加地点，你的路书会在这里慢慢成形。</p></div>
+      <div class="export-toolbar"><div><strong>带走这一份心动</strong><span>高清 PNG · 1080 × 1440 · 无水印</span></div><button id="export-png" class="primary" disabled><span aria-hidden="true">↓</span> 保存手绘路书</button></div>
+      <p class="preview-note">图片可以发给同行人，也可以加入你的旅行朋友圈。</p>
+      <div id="poster-description" class="sr-only" aria-live="polite"></div>
+    </section>
+  </main>
+  <nav class="mobile-nav" id="workbench-mobile-nav" aria-label="工作台视图" hidden><button data-view="edit" aria-pressed="true">✎ 编辑收藏</button><button data-view="preview" aria-pressed="false">▧ 看看路书</button></nav>
+  <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title" aria-describedby="guide-intro">
+    <div class="dialog-top"><div><span class="eyebrow">YOUR FIRST LITTLE JOURNEY</span><h2 id="guide-title">把喜欢，一步步变成路书</h2><p id="guide-intro">四步就好。随时关闭，按自己的节奏体验。</p></div><button class="icon-button" data-close="guide-dialog" aria-label="关闭使用指南" autofocus>×</button></div>
+    <ol class="guide-steps">
+      <li><span class="guide-step-icon" data-icon="search"></span><div><span class="guide-kicker">01 / 发现灵感</span><h3>搜一座想去的城</h3><p>在发现页搜索「杭州」或「上海」，也可以直接点城市快捷入口，浏览对应的旅行攻略。</p></div></li>
+      <li><span class="guide-step-icon" data-icon="travel"></span><div><span class="guide-kicker">02 / 收下心动</span><h3>想带进行程，就点「旅行收藏」</h3><p>笔记里的地点会自动进入收藏灵感，重复地点会合并。普通收藏只留着以后看。</p><div class="guide-collection-types"><span><span data-icon="bookmark"></span>普通收藏 · 留着看</span><span><span data-icon="travel"></span>旅行收藏 · 带进计划</span></div></div></li>
+      <li><span class="guide-step-icon" data-icon="discover"></span><div><span class="guide-kicker">03 / 安排这一天</span><h3>收藏是候选，今天去哪由你定</h3><p>点底部「去安排这一天」，再点地点上的「加入行程」，最多选 6 站。也可以「按偏好整理一天」，再调整顺序、停留时间和备注。</p></div></li>
+      <li><span class="guide-step-icon" data-icon="download"></span><div><span class="guide-kicker">04 / 带走这一份喜欢</span><h3>换个风格，保存手绘路书</h3><p>水彩、彩铅、复古，选你喜欢的表达，再点「保存手绘路书」。得到一张 1080 × 1440 的 PNG，可以分享给同行人或放进朋友圈。</p><p class="guide-phone-hint">手机端：点底部「看看路书」，就能切换风格和保存。</p></div></li>
+    </ol>
+    <div class="guide-dialog-footer"><p>随时点顶部「?」重看使用指南。</p><div><button class="primary" data-guide-city="杭州">从杭州开始 ↗</button><button class="outline" data-guide-city="上海">逛逛上海</button><button class="text-button" data-close="guide-dialog">我自己试试</button></div></div>
+  </dialog>
+  <dialog id="note-dialog" class="note-dialog"><div class="dialog-top"><div><span class="eyebrow">A LITTLE EVERYDAY INSPIRATION</span><h2 id="note-dialog-title"></h2><p>收藏成形编辑部 · 原创示例笔记</p></div><button class="icon-button" data-close="note-dialog" aria-label="关闭笔记">×</button></div><div id="note-dialog-content"></div><div id="note-dialog-actions" class="note-dialog-actions"></div></dialog>
+  <dialog id="inspiration-dialog" class="form-dialog"><form id="inspiration-form"><div class="dialog-top"><div><span class="eyebrow">KEEP THE LITTLE THINGS</span><h2 id="inspiration-dialog-title">收下一份旅行心动</h2></div><button type="button" class="icon-button" data-close="inspiration-dialog" aria-label="关闭">×</button></div><input name="id" type="hidden"><label>想去的地点 <span>必填 · 最多20字</span><input name="place" required maxlength="20" placeholder="例如：西湖边的一间咖啡馆"></label><label>属于哪一类？<select name="category"><option value="nature">自然</option><option value="street">街巷</option><option value="culture">人文</option><option value="food">美食</option><option value="coffee">茶咖</option><option value="other">其他</option></select></label><label>让我心动的理由 <span>最多40字</span><textarea name="reason" maxlength="40" rows="2" placeholder="想坐在窗边，看人们慢慢走过。"></textarea></label><label>原笔记链接 <span>选填</span><input name="sourceUrl" type="url" maxlength="2048" placeholder="粘贴小红书原帖链接，方便回看"></label><label>笔记摘录或自己的补充 <span>选填 · 最多300字</span><textarea name="excerpt" maxlength="300" rows="3" placeholder="留下对安排这一天有帮助的信息。"></textarea></label><p class="field-error" id="form-error" role="alert"></p><div class="dialog-actions"><button type="button" class="outline" data-close="inspiration-dialog">取消</button><button class="primary" type="submit">保存这份心动</button></div></form></dialog>
+  <dialog id="confirm-dialog" class="confirm-dialog"><h2 id="confirm-title">确认操作</h2><p id="confirm-message"></p><div class="dialog-actions"><button id="confirm-no" class="outline">取消</button><button id="confirm-yes" class="primary">确认</button></div></dialog>
+  <dialog id="image-dialog" class="image-dialog"><div class="dialog-top"><div><h2>这一天，值得留住</h2><p>若下载没有开始，可打开大图或长按图片保存。</p></div><button class="icon-button" data-close="image-dialog" aria-label="关闭大图">×</button></div><img id="export-image" alt="导出的手绘路书"><div class="dialog-actions"><a id="download-again" class="primary" download="收藏成形.png">下载图片</a><a id="open-image" class="outline" target="_blank" rel="noopener">打开大图</a></div></dialog>
+  <dialog id="about-dialog" class="confirm-dialog"><div class="dialog-top"><h2>关于收藏成形</h2><button class="icon-button" data-close="about-dialog" aria-label="关闭">×</button></div><p>把收藏里的旅行心动，变成属于你的手绘路书。</p><p>发现页包含22篇原创示例笔记。日常内容可以普通收藏，杭州和上海的旅行内容可以带入路书，两座城市分别保留行程草稿。未接入小红书账号，也可以手动添加自己的地点和笔记链接。</p><p>杭州部分地点参考提供的真实帖子截图，可回看来源；上海与日常笔记为演示创作。封面由AI辅助制作，并非实景照片。心动理由和停留时长都可以改成自己的版本。</p><p>按偏好整理使用本地标签规则；插画是风格化表达，行程顺序不是导航路线。草稿仅保存在此浏览器，建议导出项目 JSON 备份。</p></dialog>
+  <input id="json-file" type="file" accept=".json,application/json" hidden>
+  <dialog id="source-dialog" class="image-dialog"><div class="dialog-top"><div><span class="eyebrow">WHERE THE INSPIRATION BEGAN</span><h2 id="source-title"></h2><p id="source-author"></p></div><button class="icon-button" data-close="source-dialog" aria-label="关闭来源">×</button></div><p id="source-summary" class="source-summary"></p><p class="source-disclaimer">以下为提供的原帖截图，未提供原帖链接。地点由人工整理，心动理由与停留时长是演示设定，可自行修改。</p><div id="source-images"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>请启用 JavaScript，以编辑行程并生成手绘路书。</noscript>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
